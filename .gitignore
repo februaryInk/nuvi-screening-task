@@ -1,0 +1,111 @@
+# https://help.github.com/articles/ignoring-files tells more about ignoring files.
+
+# Bundler configuration files.
+# Commit message text file.
+# Rails documentation files.
+# Log files.
+# Project-related storage.
+# Temp files.
+# Default unzipping directory.
+
+/.bundle
+/commit-message.txt
+/doc/
+/log/*.log
+/storage
+/tmp
+/news_xml
+
+# Compiled source code
+
+# Compiled bitmap graphics.
+# Compiled Java class files.
+# Command executable program memory images.
+# Dynamic-link libraries.
+# Directly executable programs.
+# Compiled Python module.
+# Compiled Python files.
+# Object files.
+# Shared object files.
+
+*.cbm
+*.class
+*.com
+*.dll
+*.exe
+*.pyc
+*.pyo
+*.o
+*.so
+
+# Compressed packages 
+
+# If any of these do exist in a project folder, it is better to unpack them and let Git 
+# handle any necessary compression.
+
+# 7-zip archives.
+# Apple disk image archives.
+# GNU zip archives.
+# ISO tables.
+# Java archives.
+# RAR archives.
+# TAR archives.
+# PKZip, WinZip, or Mac OS X archives.
+
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Default database generated
+
+# Default SQLite database files.
+
+/db/*.sqlite3
+/db/*.sqlite3-journal
+*.sql
+*.sqlite
+
+# IDE generated
+
+# Text editor backup files.
+# Backup files.
+# Brainbloom files.
+# Eclipse files.
+# Vim and Emac swap files.
+
+*~
+*.bak
+.idea
+.project
+*.swp
+
+# OS generated
+
+# Microsoft compressed files.
+# Mac Finder directories.
+# Mac Finder directories.
+# Hidden Windows picture viewing files.
+# Mac search-related files.
+# Hidden Windows thumbnail view files.
+# Hidden Mac trashed files.
+
+._*
+.DS_Store
+.DS_Store?
+ehthumbs.db
+.Spotlight-V100
+thumbs.db
+.Trashes
+
+# Security
+
+# YAML secrets file.
+# YAML database file. Protect database passwords.
+
+/config/secrets.yml
+database.yml

@@ -34,33 +34,35 @@ class Transferer
   # download and unpack one zip.
   def download_and_unpack( http, zip )
     uri = URI.parse( URI.encode( self.origin_url + zip ) )
+    zip_destination = self.destination_folder + zip
     
     if Net::HTTP.get_response( uri ).kind_of?( Net::HTTPSuccess )
-      puts( 'Downloading and extracting ' + zip + '...' )
+      puts 'Downloading and extracting ' + zip + '...'
       
       begin
-        File.delete( self.destination_folder + zip ) if File.exists?( destination_folder + zip )
+        File.delete( zip_destination ) if File.exists?( zip_destination )
         
-        File.open( self.destination_folder + zip, 'wb' ) do | file |
+        File.open( zip_destination, 'wb' ) do | file |
           http.get( uri ) do | str |
             file.write( str )
           end
         end
                 
-        Zip::File.open( self.destination_folder + zip ) do | zip_file |
+        Zip::File.open( zip_destination ) do | zip_file |
           zip_file.each do | entry |
-            File.delete( self.destination_folder + entry.name ) if File.exists?( self.destination_folder + entry.name )
-            entry.extract( self.destination_folder + entry.name )
+            entry_destination = self.destination_folder + entry.name
+            File.delete( entry_destination ) if File.exists?( entry_destination )
+            entry.extract( entry_destination )
           end
         end
       rescue StandardError => e
         puts( e )
       end
     else
-      puts( 'File ' + zip + ' could not be reached.' )
+      puts 'File ' + zip + ' could not be reached.'
     end
     
-    File.delete( self.destination_folder + zip ) if File.exists?( self.destination_folder + zip )
+    File.delete( zip_destination ) if File.exists?( zip_destination )
   end
   
   # iterate over the zips and download and unpack each one. if these zips
@@ -81,7 +83,7 @@ class Transferer
   def load_to_redis
     redis = Redis.new
     
-    puts( 'Starting entries in ' + destination_list + ': ' + redis.llen( destination_list ).to_s )
+    puts 'Starting entries in ' + destination_list + ': ' + redis.llen( destination_list ).to_s
     
     Dir.glob( destination_folder + '*.xml' ) do | xml_file |
       xml = File.open( xml_file ).read
@@ -91,7 +93,7 @@ class Transferer
       File.delete( xml_file )
     end
     
-    puts( 'Finishing entries in ' + destination_list + ': ' + redis.llen( destination_list ).to_s )
+    puts 'Finishing entries in ' + destination_list + ': ' + redis.llen( destination_list ).to_s
     FileUtils.rm_rf( self.destination_folder ) if Dir.glob( self.destination_folder ).empty?
   end
   

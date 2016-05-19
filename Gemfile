@@ -1,11 +1,11 @@
-source 'https://rubygems.org'
+source( 'https://rubygems.org' )
 
-ruby '2.2.2'
+ruby( '2.2.2' )
 
-gem 'nokogiri'
+gem( 'nokogiri' )
 
-gem 'pry'
+gem( 'pry' )
 
-gem 'redis'
+gem( 'redis' )
 
-gem 'rubyzip'
+gem( 'rubyzip' )
